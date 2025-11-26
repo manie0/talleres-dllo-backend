@@ -109,15 +109,26 @@ router.put("/:id", authUser, async (req, res) => {
 
 /**
  * ELIMINAR/DESACTIVAR USUARIO
- * Solo admin puede hacerlo
+ * Puede hacerlo:
+ *  - el administrador
+ *  - el mismo usuario
  */
-router.delete("/:id", authUser, requireRole("admin"), async (req, res) => {
+router.delete("/:id", authUser, async (req, res) => {
   try {
-    await deleteUser(req.params.id);
+    const requester = req.user!;
+    const id = req.params.id;
+
+    const isSelf = requester._id.toString() === id;
+    const isAdmin = requester.role === "admin";
+
+    if (!isSelf && !isAdmin) {
+      return res.status(403).json({ message: "No autorizado" });
+    }
+
+    await deleteUser(id);
     res.json({ message: "User disabled" });
   } catch (e: any) {
     res.status(400).json({ message: e.message });
   }
 });
-
 export default router;
