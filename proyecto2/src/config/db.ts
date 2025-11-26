@@ -7,14 +7,14 @@ export async function connectDB() {
   const uri = process.env.MONGO_URI;
 
   if (!uri) {
-    throw new Error("❌ No se encontró MONGO_URI en el archivo .env");
+    throw new Error("No se encontró MONGO_URI en el archivo .env");
   }
 
   try {
     await mongoose.connect(uri);
-    console.log("🔥 MongoDB Atlas conectado exitosamente");
+    console.log("MongoDB Atlas conectado exitosamente");
   } catch (error) {
-    console.error("❌ Error conectando a MongoDB Atlas:", error);
+    console.error("Error conectando a MongoDB Atlas:", error);
     process.exit(1);
   }
 }
