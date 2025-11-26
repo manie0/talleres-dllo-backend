@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+
+    // Módulos para Node
+    "module": "commonjs",
+    "target": "ES2020",
+    "moduleResolution": "node",
+
+    // Necesario para import default en jsonwebtoken, mongoose, bcrypt
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    // Tipos (importante: NO USES jest si no tienes pruebas)
+    "types": ["node"],
+
+    // Si usas Jest, lo agregas luego. Por ahora causa conflicto.
+    // "types": ["node", "jest"],
+
+    // Mapas
+    "sourceMap": true,
+
+    // No generes tipos
+    "declaration": false,
+    "declarationMap": false,
+
+    // Estricto pero sin romper jsonwebtoken
+    "strict": true,
+
+    // Node no usa JSX
+    "jsx": "preserve",
+
+    // Evita errores en dependencias
+    "skipLibCheck": true,
+
+    // MUY IMPORTANTE: evitar errores falsos en jsonwebtoken
+    "isolatedModules": false,
+
+    // AGREGAR PARA EVITAR ERRORES DE TIPOS CON JWT
+    "resolveJsonModule": true,
+    "allowJs": true
+  },
+
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
